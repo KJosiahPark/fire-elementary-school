@@ -75,9 +75,9 @@ const App = () => {
           onChange={handleEnteredStudentNameChange}
         />
         <button onClick={() => {
-          Controller.registerTeacher(enteredStudentName.lastName, enteredStudentName.firstName)
+          Controller.registerStudent(enteredStudentName.lastName, enteredStudentName.firstName)
         }}>
-          register teacher
+          register student
         </button>
       </div>
       <DataDisplay />
