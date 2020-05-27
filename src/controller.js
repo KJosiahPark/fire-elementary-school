@@ -10,10 +10,20 @@ class Controller {
 
   static registerTeacher = (lastName, firstName) => {
     console.log(`registering teacher: ${lastName} ${firstName} ...`);
+    const teacher = {
+      lastName: lastName,
+      firstName: firstName
+    }
+    Controller.fireb.db.ref("root/school-data/teachers").push(teacher);
   }
 
   static registerStudent = (lastName, firstName) => {
     console.log(`registering student: ${lastName} ${firstName} ...`);
+    const student = {
+      lastName: lastName,
+      firstName: firstName
+    }
+    Controller.fireb.db.ref("root/school-data/students").push(student);
   }
 }
 
