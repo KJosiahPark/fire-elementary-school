@@ -1,15 +1,19 @@
+import Firebase from './Firebase'
+
 class Controller {
+  static fireb = new Firebase();
+  
   static registerClass = (className) => {
-    console.log(className);
+    console.log(`registering class: ${className} ...`);
+    Controller.fireb.db.ref("root/school-data/classes").push({name: className});
   }
 
   static registerTeacher = (lastName, firstName) => {
-    // console.log(lastName);
-    console.log(`${lastName} ${firstName}`);
+    console.log(`registering teacher: ${lastName} ${firstName} ...`);
   }
 
   static registerStudent = (lastName, firstName) => {
-    console.log(`${lastName} ${firstName}`);
+    console.log(`registering student: ${lastName} ${firstName} ...`);
   }
 }
 
