@@ -46,6 +46,19 @@ class Controller {
     Controller.fireb.db.ref("root/school-data/students/").push(student);
   }
 
+  static removeClass = (classId) => {
+    console.log(`removing class: ${classId} ...`);
+    Controller.fireb.db.ref(`root/school-data/classes/${classId}`).remove();
+  }
+  static removeTeacher = (teacherId) => {
+    console.log(`removing teacher: ${teacherId} ...`);
+    Controller.fireb.db.ref(`root/school-data/teachers/${teacherId}`).remove();
+  }
+  static removeStudent = (studentId) => {
+    console.log(`removing student: ${studentId} ...`);
+    Controller.fireb.db.ref(`root/school-data/students/${studentId}`).remove();
+  }
+
   // user account handling for email & password user
   static signUpUserEP = (email, password) => {
     Controller.fireb
