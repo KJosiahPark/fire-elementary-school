@@ -5,29 +5,34 @@ import Firebase from './Firebase'
 class Controller {
   static fireb = new Firebase();
 
-  static setUpOnValue = (onValueFunc) => {
+  // database event handler
+  static setUpOnClassesValue = (onClassValueFunc) => {
     Controller.fireb.db.ref('root/school-data/classes/').on('value',
     (snapshot) => {
-      onValueFunc("classes", snapshot.val());
+      onClassValueFunc(snapshot.val());
     },
     (err) => console.log(err));
+  }
+  static setUpOnTeachersValue = (onTeacherValueFunc) => {
     Controller.fireb.db.ref('root/school-data/teachers/').on('value',
     (snapshot) => {
-      onValueFunc("teachers", snapshot.val());
+      onTeacherValueFunc(snapshot.val());
     },
     (err) => console.log(err));
+  }
+  static setUpOnStudentsValue = (onStudentValueFunc) => {
     Controller.fireb.db.ref('root/school-data/students/').on('value',
     (snapshot) => {
-      onValueFunc("students", snapshot.val());
+      onStudentValueFunc(snapshot.val());
     },
     (err) => console.log(err));
   }
   
+  // handle database edits
   static registerClass = (className) => {
     console.log(`registering class: ${className} ...`);
     Controller.fireb.db.ref("root/school-data/classes/").push({name: className});
   }
-
   static registerTeacher = (lastName, firstName, salary) => {
     console.log(`registering teacher: ${lastName} ${firstName} $: ${salary} ...`);
     const teacher = {
@@ -37,7 +42,6 @@ class Controller {
     }
     Controller.fireb.db.ref("root/school-data/teachers/").push(teacher);
   }
-
   static registerStudent = (lastName, firstName, year) => {
     console.log(`registering student: ${lastName} ${firstName} yr: ${year}...`);
     const student = {
@@ -48,7 +52,7 @@ class Controller {
     Controller.fireb.db.ref("root/school-data/students/").push(student);
   }
 
-  static assignTeacherToClass = (classId, teacherId) => {
+  static assignClassToTeacher = (classId, teacherId) => {
     console.log(`assigning: ${teacherId} to ${classId} ...`);
     Controller.fireb.db.ref(`root/school-data/classes/${classId}`).update({teacher: teacherId});
   }
@@ -66,6 +70,12 @@ class Controller {
     Controller.fireb.db.ref(`root/school-data/students/${studentId}`).remove();
   }
 
+  // login evnet handler
+  static setUpOnAccount = (onUserFunc) => {
+    Controller.fireb
+    .auth.onAuthStateChanged(onUserFunc);
+  }
+
   // user account handling for email & password user
   static signUpUserEP = (email, password) => {
     Controller.fireb
@@ -76,7 +86,6 @@ class Controller {
       console.log(error);
     });
   }
-
   static signInUserEP = (email, password) => {
     Controller.fireb
     .signInUserWithEmailAndPassword(email, password).then(authUser => {
@@ -86,7 +95,6 @@ class Controller {
       console.log(error);
     });
   }
-
   static signOutUserEP = () => {
     Controller.fireb
     .signOutUser()
@@ -98,11 +106,6 @@ class Controller {
     });
   }
 
-  // handling login status
-  static setUpOnAccount = (onUserFunc) => {
-    Controller.fireb
-    .auth.onAuthStateChanged(onUserFunc);
-  }
 }
 
 export default Controller;
