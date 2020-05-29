@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 
 import './index.css';
 import Controller from './controller';
-import RegisterClass from './RegisterClass';
-import RegisterTeacher from './RegisterTeacher';
-import RegisterStudent from './RegisterStudent';
-import { SignUpHandle, SignInHandle, SignOut } from './signUpInOutHandle';
-import DataDisplay from './DataDisplay';
+import RegisterClass from './register/RegisterClass';
+import RegisterTeacher from './register/RegisterTeacher';
+import RegisterStudent from './register/RegisterStudent';
+import { SignUpHandle, SignInHandle, SignOut } from './auth/signUpInOutHandle';
+import DataDisplay from './data-control/DataDisplay';
 
 const App = () => {
   
@@ -35,6 +35,10 @@ const App = () => {
   const handleRegisterStudentRequest = (studentNameInfo) => {
     const { lastName, firstName, year } = studentNameInfo;
     Controller.registerStudent(lastName, firstName, year);
+  }
+
+  const handleAssignTeacherToClassRequest = (classId, teacherId) => {
+    Controller.assignTeacherToClass(classId, teacherId);
   }
 
   const handleRemoveClassRequest = (classId) => {
@@ -71,7 +75,8 @@ const App = () => {
       <DataDisplay
         handleRemoveClassRequest={handleRemoveClassRequest}
         handleRemoveTeacherRequest={handleRemoveTeacherRequest}
-        handleRemoveStudentRequest={handleRemoveStudentRequest} />
+        handleRemoveStudentRequest={handleRemoveStudentRequest}
+        handleAssignTeacherToClassRequest={handleAssignTeacherToClassRequest}/>
     </div>
   );
 }
