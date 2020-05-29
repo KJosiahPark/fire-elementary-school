@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useInputChange } from './fakeHooks'
+import { useInputChange } from '../fakeHooks'
 
 const SignUpHandle = (props) => {
   const { handleSignUpRequest } = props;
