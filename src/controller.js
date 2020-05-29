@@ -48,15 +48,46 @@ class Controller {
 
   // user account handling for email & password user
   static signUpUserEP = (email, password) => {
-    Controller.fireb.registerUserWithEmailAndPassword(email, password);
+    Controller.fireb
+    .registerUserWithEmailAndPassword(email, password).then(authUser => {
+      //
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
 
-  static loginUserEP = (email, password) => {
-    Controller.fireb.registerUserWithEmailAndPassword(email, password);
+  static signInUserEP = (email, password) => {
+    Controller.fireb
+    .signInWithEmailAndPassword(email, password).then(authUser => {
+      //
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
 
   static signOutUserEP = () => {
-    Controller.fireb.registerUserWithEmailAndPassword();
+    Controller.fireb
+    .signOutUser()
+    .then(() => {
+      console.log("logged out")
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+
+  // handling login status
+  static setUpOnAccount = () => {
+    Controller.fireb
+    .auth.onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in.
+      } else {
+        // No user is signed in.
+      }
+    });
   }
 }
 

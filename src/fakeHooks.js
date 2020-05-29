@@ -8,7 +8,11 @@ const useInputChange = (initialObj) => {
     [e.currentTarget.name]: e.currentTarget.value
   })
 
-  return [input, handleInputChange]
+  const reset = () => {
+    setInput(initialObj);
+  }
+
+  return [input, handleInputChange, reset]
 }
 
 export { useInputChange };
