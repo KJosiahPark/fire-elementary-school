@@ -29,12 +29,12 @@ const App = () => {
     Controller.registerClass(className);
   }
   const handleRegisterTeacherRequest = (teacherNameInfo) => {
-    const { lastName, firstName } = teacherNameInfo;
-    Controller.registerTeacher(lastName, firstName);
+    const { lastName, firstName, salary } = teacherNameInfo;
+    Controller.registerTeacher(lastName, firstName, salary);
   }
   const handleRegisterStudentRequest = (studentNameInfo) => {
-    const { lastName, firstName } = studentNameInfo;
-    Controller.registerStudent(lastName, firstName);
+    const { lastName, firstName, year } = studentNameInfo;
+    Controller.registerStudent(lastName, firstName, year);
   }
 
   const handleRemoveClassRequest = (classId) => {

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const RegisterTeacher = (props) => {
   const { handleRegisterTeacherRequest } = props;
 
-  const [enteredTeacherName, setEnteredTeacherName] = useState({ lastName: "", firstName: "" });
+  const [enteredTeacherName, setEnteredTeacherName] = useState({ lastName: "", firstName: "", salary: "" });
 
   const handleEnteredTeacherNameChange = (event) => {
     let k = event.target.name; // either "firstName" or "lastName"
@@ -24,6 +24,11 @@ const RegisterTeacher = (props) => {
       <input
         name="firstName"
         placeholder="first name"
+        onChange={handleEnteredTeacherNameChange}
+      />
+      <input
+        name="salary"
+        placeholder="salary"
         onChange={handleEnteredTeacherNameChange}
       />
       <button onClick={() => {

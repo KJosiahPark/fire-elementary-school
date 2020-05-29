@@ -28,20 +28,22 @@ class Controller {
     Controller.fireb.db.ref("root/school-data/classes/").push({name: className});
   }
 
-  static registerTeacher = (lastName, firstName) => {
-    console.log(`registering teacher: ${lastName} ${firstName} ...`);
+  static registerTeacher = (lastName, firstName, salary) => {
+    console.log(`registering teacher: ${lastName} ${firstName} $: ${salary} ...`);
     const teacher = {
       lastName: lastName,
-      firstName: firstName
+      firstName: firstName,
+      salary: salary,
     }
     Controller.fireb.db.ref("root/school-data/teachers/").push(teacher);
   }
 
-  static registerStudent = (lastName, firstName) => {
-    console.log(`registering student: ${lastName} ${firstName} ...`);
+  static registerStudent = (lastName, firstName, year) => {
+    console.log(`registering student: ${lastName} ${firstName} yr: ${year}...`);
     const student = {
       lastName: lastName,
-      firstName: firstName
+      firstName: firstName,
+      year: year,
     }
     Controller.fireb.db.ref("root/school-data/students/").push(student);
   }
