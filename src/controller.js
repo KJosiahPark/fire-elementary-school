@@ -1,5 +1,7 @@
 import Firebase from './Firebase'
 
+// What is the difference between onStateChange -> send state to firebase
+
 class Controller {
   static fireb = new Firebase();
 
@@ -42,6 +44,19 @@ class Controller {
       firstName: firstName
     }
     Controller.fireb.db.ref("root/school-data/students/").push(student);
+  }
+
+  // user account handling for email & password user
+  static signUpUserEP = (email, password) => {
+    Controller.fireb.registerUserWithEmailAndPassword(email, password);
+  }
+
+  static loginUserEP = (email, password) => {
+    Controller.fireb.registerUserWithEmailAndPassword(email, password);
+  }
+
+  static signOutUserEP = () => {
+    Controller.fireb.registerUserWithEmailAndPassword();
   }
 }
 
