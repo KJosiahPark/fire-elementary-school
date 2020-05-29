@@ -6,10 +6,14 @@ import Controller from './controller';
 import RegisterClass from './RegisterClass';
 import RegisterTeacher from './RegisterTeacher';
 import RegisterStudent from './RegisterStudent';
-import SignInOutHandle from './SignInOutHandle';
+import SignUpHandle from './signUpInOutHandle';
 import DataDisplay from './DataDisplay';
 
 const App = () => {
+  useEffect(() => {
+    
+  }, [])
+
   const handleRegisterClassRequest = (className) => {
     Controller.registerClass(className);
   }
@@ -26,7 +30,7 @@ const App = () => {
 
   const handleSignUpRequest = (signUpInfo) => {
     const { email, password } = signUpInfo;
-    console.log(`i: ${signUpInfo.email}, ${signUpInfo.password}`);
+    Controller.signUpUserEP(email, password);
   }
 
   return (
@@ -35,7 +39,7 @@ const App = () => {
       <RegisterClass handleRegisterClassRequest={handleRegisterClassRequest} />
       <RegisterTeacher handleRegisterTeacherRequest={handleRegisterTeacherRequest} />
       <RegisterStudent handleRegisterStudentRequest={handleRegisterStudentRequest} />      
-      <SignInOutHandle handleSignUpRequest={handleSignUpRequest} />
+      <SignUpHandle handleSignUpRequest={handleSignUpRequest} />
       <DataDisplay />
     </div>
   );
