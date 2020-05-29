@@ -6,7 +6,9 @@ import Controller from './controller';
 import RegisterClass from './register/RegisterClass';
 import RegisterTeacher from './register/RegisterTeacher';
 import RegisterStudent from './register/RegisterStudent';
-import { SignUpHandle, SignInHandle, SignOut } from './auth/signUpInOutHandle';
+import SignUp from './auth/SignUp';
+import SignIn from './auth/SignIn';
+import SignOut from './auth/SignOut';
 import DataDisplay from './data-control/DataDisplay';
 
 const App = () => {
@@ -37,10 +39,6 @@ const App = () => {
     Controller.registerStudent(lastName, firstName, year);
   }
 
-  const handleAssignTeacherToClassRequest = (classId, teacherId) => {
-    Controller.assignTeacherToClass(classId, teacherId);
-  }
-
   const handleRemoveClassRequest = (classId) => {
     Controller.removeClass(classId);
   }
@@ -69,14 +67,10 @@ const App = () => {
       <RegisterClass handleRegisterClassRequest={handleRegisterClassRequest} />
       <RegisterTeacher handleRegisterTeacherRequest={handleRegisterTeacherRequest} />
       <RegisterStudent handleRegisterStudentRequest={handleRegisterStudentRequest} />      
-      <SignUpHandle handleSignUpRequest={handleSignUpRequest} />
-      <SignInHandle handleSignInRequest={handleSignInRequest} />
-      <SignOut handleSignOutRequest={handleSignOutRequest}/>
-      <DataDisplay
-        handleRemoveClassRequest={handleRemoveClassRequest}
-        handleRemoveTeacherRequest={handleRemoveTeacherRequest}
-        handleRemoveStudentRequest={handleRemoveStudentRequest}
-        handleAssignTeacherToClassRequest={handleAssignTeacherToClassRequest}/>
+      <SignUp handleSignUpRequest={handleSignUpRequest} />
+      <SignIn handleSignInRequest={handleSignInRequest} />
+      <SignOut handleSignOutRequest={handleSignOutRequest} />
+      <DataDisplay />
     </div>
   );
 }
