@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const RegisterStudent = (props) => {
   const { handleRegisterStudentRequest } = props;
 
-  const [enteredStudentName, setEnteredStudentName] = useState({ firstName: "", lastName: "" });
+  const [enteredStudentName, setEnteredStudentName] = useState({ firstName: "", lastName: "", year: -1});
 
   const handleEnteredStudentNameChange = (event) => {
     let k = event.target.name; // either "firstName" or "lastName"
@@ -26,8 +26,12 @@ const RegisterStudent = (props) => {
         placeholder="first name"
         onChange={handleEnteredStudentNameChange}
       />
+      <input
+        name="year"
+        placeholder="0"
+        onChange={handleEnteredStudentNameChange}
+      />
       <button onClick={() => {
-        console.log(`${enteredStudentName.lastName}, ${enteredStudentName.firstName}`);
         handleRegisterStudentRequest(enteredStudentName);
       }}>
         register student
