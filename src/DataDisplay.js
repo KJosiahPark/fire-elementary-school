@@ -11,8 +11,10 @@ class DataDisplay extends React.Component {
 
   onValue = (dataGroup, val) => {
     this.setState((prevState) => {
-      prevState[dataGroup] = val;
-      return prevState;
+      if (val !== null) {
+        prevState[dataGroup] = val;
+        return prevState;
+      }
     })
   }
 
@@ -20,25 +22,33 @@ class DataDisplay extends React.Component {
     Controller.setUpOnValue(this.onValue);
   }
 
+  isNullOrEmpty
+
   render = () => {
+    const {
+      classes, 
+      teachers,
+      students
+    } = this.state;
+    
     return (
       <div>
-        <button onClick={() => console.log(this.state)}>print state</button>
+        <button onClick={() => console.log(this.state)}>print database state</button>
         <h1>Classes List</h1>
-          {Object.keys(this.state.classes).map((key, index) => {
-            const classListing = this.state.classes[key];
-            return <p>{classListing.name}</p>;
-          })}
+        {Object.keys(classes).map((key, index) => {
+          const classListing = classes[key];
+          return <p key={key}>{classListing.name}</p>;
+        })}
         <h1>Teachers List</h1>
-          {Object.keys(this.state.teachers).map((key, index) => {
-            const teacher = this.state.teachers[key];
-            return <p>{teacher.lastName}</p>;
-          })}
+        {Object.keys(teachers).map((key, index) => {
+          const teacher = teachers[key];
+          return <p key={key}>{teacher.lastName}</p>;
+        })}
         <h1>Students List</h1>
-          {Object.keys(this.state.students).map((key, index) => {
-            const student = this.state.students[key];
-            return <p>{student.lastName}</p>;
-          })}
+        {Object.keys(students).map((key, index) => {
+          const student = students[key];
+          return <p key={key}>{student.lastName}</p>;
+        })}
       </div>
     )
   }

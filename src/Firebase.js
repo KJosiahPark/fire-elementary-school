@@ -1,7 +1,7 @@
 import app from 'firebase/app';
-import 'firebase/auth';
 import 'firebase/database';
- 
+import 'firebase/auth';
+
 const config = {
   apiKey: process.env.REACT_APP_apiKey,
   authDomain: process.env.REACT_APP_authDomain,
@@ -11,35 +11,35 @@ const config = {
   messagingSenderId: process.env.REACT_APP_messagingSenderId,
   appId: process.env.REACT_APP_appId,
 };
- 
+
 class Firebase {
   constructor() {
-    app.initializeApp(config);
- 
-    this.auth = app.auth();
+    if (!app.apps.length) {
+      app.initializeApp(config);
+    }
+
     this.db = app.database();
+    this.auth = app.auth();
   }
- 
-  // // *** Auth API ***
- 
-  // doCreateUserWithEmailAndPassword = (email, password) =>
-  //   this.auth.createUserWithEmailAndPassword(email, password);
- 
-  // doSignInWithEmailAndPassword = (email, password) =>
-  //   this.auth.signInWithEmailAndPassword(email, password);
- 
-  // doSignOut = () => this.auth.signOut();
- 
-  // doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
- 
-  // doPasswordUpdate = password =>
-  //   this.auth.currentUser.updatePassword(password);
- 
+
+  // *** Auth API ***
+
+  registerUserWithEmailAndPassword = (email, password) =>
+    this.auth.createUserWithEmailAndPassword(email, password);
+
+  loginUserWithEmailAndPassword = (email, password) =>
+    this.auth.signInWithEmailAndPassword(email, password);
+
+  signOutUser = () => this.auth.signOut();
+
+  doPasswordReset = (email) => this.auth.sendPasswordResetEmail(email);
+  doPasswordUpdate = (password) => this.auth.currentUser.updatePassword(password);
+
   // // *** User API ***
- 
+
   // user = uid => this.db.ref(`users/${uid}`);
- 
+
   // users = () => this.db.ref('users');
 }
- 
+
 export default Firebase;

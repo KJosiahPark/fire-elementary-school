@@ -1,85 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
 import './index.css';
-import Controller from './controller'
-import DataDisplay from './DataDisplay'
+import Controller from './controller';
+import RegisterClass from './RegisterClass';
+import RegisterTeacher from './RegisterTeacher';
+import RegisterStudent from './RegisterStudent';
+import SignInOutHandle from './SignInOutHandle';
+import DataDisplay from './DataDisplay';
 
 const App = () => {
-  const [enteredClass, setEnteredClass] = useState("");
-
-  const handleEnteredClassChange = (event) => {
-    setEnteredClass(event.target.value);
+  const handleRegisterClassRequest = (className) => {
+    Controller.registerClass(className);
   }
 
-  
-  const [enteredTeacherName, setEnteredTeacherName] = useState({firstName: "", lastName: ""});
-
-  const handleEnteredTeacherNameChange = (event) => {
-    let k = event.target.name; // either "firstName" or "lastName"
-    let v = event.target.value; // what user entered
-    setEnteredTeacherName(prevLName => {
-      prevLName[k] = v;
-      return prevLName
-    });
+  const handleRegisterTeacherRequest = (teacherNameInfo) => {
+    const { lastName, firstName } = teacherNameInfo;
+    Controller.registerTeacher(lastName, firstName);
   }
 
+  const handleRegisterStudentRequest = (studentNameInfo) => {
+    const { lastName, firstName } = studentNameInfo;
+    Controller.registerStudent(lastName, firstName);
+  }
 
-  const [enteredStudentName, setEnteredStudentName] = useState({firstName: "", lastName: ""});
-
-  const handleEnteredStudentNameChange = (event) => {
-    let k = event.target.name; // either "firstName" or "lastName"
-    let v = event.target.value; // what user entered
-    setEnteredStudentName(prevLName => {
-      prevLName[k] = v;
-      return prevLName
-    });
+  const handleSignUpRequest = (signUpInfo) => {
+    const { email, password } = signUpInfo;
+    console.log(`i: ${signUpInfo.email}, ${signUpInfo.password}`);
   }
 
   return (
     <div>
       <h1>Welcome, admin</h1>
-      <div>
-        <input
-          placeholder="class name"
-          onChange={handleEnteredClassChange}
-        />
-        <button onClick={() => Controller.registerClass(enteredClass)}>register class</button>
-      </div>
-      <div>
-        <input
-          name="lastName"
-          placeholder="last name"
-          onChange={handleEnteredTeacherNameChange}
-        />
-        <input
-          name="firstName"
-          placeholder="first name"
-          onChange={handleEnteredTeacherNameChange}
-        />
-        <button onClick={() => {
-          Controller.registerTeacher(enteredTeacherName.lastName, enteredTeacherName.firstName)
-        }}>
-          register teacher
-        </button>
-      </div>
-      <div>
-        <input
-          name="lastName"
-          placeholder="last name"
-          onChange={handleEnteredStudentNameChange}
-        />
-        <input
-          name="firstName"
-          placeholder="first name"
-          onChange={handleEnteredStudentNameChange}
-        />
-        <button onClick={() => {
-          Controller.registerStudent(enteredStudentName.lastName, enteredStudentName.firstName)
-        }}>
-          register student
-        </button>
-      </div>
+      <RegisterClass handleRegisterClassRequest={handleRegisterClassRequest} />
+      <RegisterTeacher handleRegisterTeacherRequest={handleRegisterTeacherRequest} />
+      <RegisterStudent handleRegisterStudentRequest={handleRegisterStudentRequest} />      
+      <SignInOutHandle handleSignUpRequest={handleSignUpRequest} />
       <DataDisplay />
     </div>
   );
