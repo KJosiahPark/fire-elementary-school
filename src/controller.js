@@ -59,7 +59,7 @@ class Controller {
 
   static signInUserEP = (email, password) => {
     Controller.fireb
-    .signInWithEmailAndPassword(email, password).then(authUser => {
+    .signInUserWithEmailAndPassword(email, password).then(authUser => {
       //
     })
     .catch(error => {
@@ -71,7 +71,7 @@ class Controller {
     Controller.fireb
     .signOutUser()
     .then(() => {
-      console.log("logged out")
+      console.log("logged out");
     })
     .catch(error => {
       console.log(error);
@@ -79,15 +79,9 @@ class Controller {
   }
 
   // handling login status
-  static setUpOnAccount = () => {
+  static setUpOnAccount = (onUserFunc) => {
     Controller.fireb
-    .auth.onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in.
-      } else {
-        // No user is signed in.
-      }
-    });
+    .auth.onAuthStateChanged(onUserFunc);
   }
 }
 

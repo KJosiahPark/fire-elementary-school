@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import './index.css';
@@ -6,23 +6,32 @@ import Controller from './controller';
 import RegisterClass from './RegisterClass';
 import RegisterTeacher from './RegisterTeacher';
 import RegisterStudent from './RegisterStudent';
-import SignUpHandle from './signUpInOutHandle';
+import { SignUpHandle, SignInHandle, SignOut } from './signUpInOutHandle';
 import DataDisplay from './DataDisplay';
 
 const App = () => {
+  
+  const [userObj, setUserObj] = useState();
   useEffect(() => {
-    
+    Controller.setUpOnAccount(whatToDoWithUser);
   }, [])
+  const whatToDoWithUser = (user) => { 
+    if (user) {
+      console.log("yeet user");
+      console.log(user);
+    } else {
+      console.log("no user");
+      console.log(user);
+    }
+  }
 
   const handleRegisterClassRequest = (className) => {
     Controller.registerClass(className);
   }
-
   const handleRegisterTeacherRequest = (teacherNameInfo) => {
     const { lastName, firstName } = teacherNameInfo;
     Controller.registerTeacher(lastName, firstName);
   }
-
   const handleRegisterStudentRequest = (studentNameInfo) => {
     const { lastName, firstName } = studentNameInfo;
     Controller.registerStudent(lastName, firstName);
@@ -32,6 +41,13 @@ const App = () => {
     const { email, password } = signUpInfo;
     Controller.signUpUserEP(email, password);
   }
+  const handleSignInRequest = (signInInfo) => {
+    const { email, password } = signInInfo;
+    Controller.signInUserEP(email, password);
+  }
+  const handleSignOutRequest = () => {
+    Controller.signOutUserEP();
+  }
 
   return (
     <div>
@@ -40,6 +56,8 @@ const App = () => {
       <RegisterTeacher handleRegisterTeacherRequest={handleRegisterTeacherRequest} />
       <RegisterStudent handleRegisterStudentRequest={handleRegisterStudentRequest} />      
       <SignUpHandle handleSignUpRequest={handleSignUpRequest} />
+      <SignInHandle handleSignInRequest={handleSignInRequest} />
+      <SignOut handleSignOutRequest={handleSignOutRequest}/>
       <DataDisplay />
     </div>
   );
