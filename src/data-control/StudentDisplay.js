@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react';
 import Controller from '../controller';
 import StudentPickClass from './StudentPickClass'
 
-const StudentDisplay = ({ classes }) => {
+const StudentDisplay = ({ classes, ...props }) => {
   const [students, setStudents] = useState({});
-  
+
   useEffect(() => {
     Controller.setUpOnStudentsValue((val) => {
       setStudents((prevState) => (val !== null) ? val : {});
@@ -32,8 +32,10 @@ const StudentDisplay = ({ classes }) => {
         const student = students[studentId];
         return <div key={studentId}>
           {displayOneStudent(student)}
-          <StudentPickClass studentId={studentId} classes={classes}/>
-          <button onClick={() => { Controller.removeStudent(studentId) }}>delet</button>
+          {props.trunc && <div>
+            <StudentPickClass studentId={studentId} classes={classes}/>
+            <button onClick={() => { Controller.removeStudent(studentId) }}>delet</button>
+          </div>}
         </div>;
       })}
     </div>
