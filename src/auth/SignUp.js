@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useInputChange } from '../fakeHooks'
+import { useInputChange } from '../fakeHooks';
+import Controller from '../controller';
 
 const SignUp = (props) => {
-  const { handleSignUpRequest } = props;
-
   const [signUpInfo, setSignUpInfo, resetInfo] = useInputChange({ email: "", password: "" });
   const [isInvalid, setInvalid] = useState(true);
 
@@ -17,6 +16,11 @@ const SignUp = (props) => {
     resetInfo();
     setInvalid(true);
   };
+  
+  const handleSignUpRequest = (signUpInfo) => {
+    const { email, password } = signUpInfo;
+    Controller.signUpUserEP(email, password);
+  }
 
   return (
     <div>

@@ -1,15 +1,14 @@
 import React from 'react';
+import Controller from '../controller';
 
 const SignOut = (props) => {
-  const { handleSignOutRequest } = props;
-
-  const onSubmit = () => {
-    handleSignOutRequest();
+  const onSignOut = () => {
+    Controller.signOutUserEP();
   };
 
   return (
     <div>
-      <button onClick={ onSubmit } >
+      <button onClick={ onSignOut } >
         Sign Out
       </button>
     </div>
