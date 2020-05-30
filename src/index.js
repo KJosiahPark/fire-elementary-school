@@ -39,16 +39,6 @@ const App = () => {
     Controller.registerStudent(lastName, firstName, year);
   }
 
-  const handleRemoveClassRequest = (classId) => {
-    Controller.removeClass(classId);
-  }
-  const handleRemoveTeacherRequest = (teacherId) => {
-    Controller.removeTeacher(teacherId);
-  }
-  const handleRemoveStudentRequest = (studentId) => {
-    Controller.removeStudent(studentId);
-  }
-
   const handleSignUpRequest = (signUpInfo) => {
     const { email, password } = signUpInfo;
     Controller.signUpUserEP(email, password);
