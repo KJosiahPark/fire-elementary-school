@@ -13,6 +13,9 @@ class Controller {
     },
     (err) => console.log(err));
   }
+  static removeOnClassesValue = () => {
+    Controller.fireb.db.ref('root/school-data/classes/').off();
+  }
   static setUpOnTeachersValue = (onTeacherValueFunc) => {
     Controller.fireb.db.ref('root/school-data/teachers/').on('value',
     (snapshot) => {
@@ -20,12 +23,18 @@ class Controller {
     },
     (err) => console.log(err));
   }
+  static removeOnTeachersValue = () => {
+    Controller.fireb.db.ref('root/school-data/teachers/').off();
+  }
   static setUpOnStudentsValue = (onStudentValueFunc) => {
     Controller.fireb.db.ref('root/school-data/students/').on('value',
     (snapshot) => {
       onStudentValueFunc(snapshot.val());
     },
     (err) => console.log(err));
+  }
+  static removeOnStudentsValue = () => {
+    Controller.fireb.db.ref('root/school-data/students/').off();
   }
   
   // handle database edits
