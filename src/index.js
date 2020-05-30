@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
-import './index.css';
+import { Link, BrowserRouter as Router, Route } from 'react-router-dom';
+import * as ROUTES from './constants/routes';
+
+// import './index.css';
 import Controller from './controller';
 import RegisterClass from './register/RegisterClass';
 import RegisterTeacher from './register/RegisterTeacher';
@@ -27,40 +30,85 @@ const App = () => {
     }
   }
 
-  const handleRegisterClassRequest = (className) => {
-    Controller.registerClass(className);
-  }
-  const handleRegisterTeacherRequest = (teacherNameInfo) => {
-    const { lastName, firstName, salary } = teacherNameInfo;
-    Controller.registerTeacher(lastName, firstName, salary);
-  }
-  const handleRegisterStudentRequest = (studentNameInfo) => {
-    const { lastName, firstName, year } = studentNameInfo;
-    Controller.registerStudent(lastName, firstName, year);
-  }
-
-  const handleSignUpRequest = (signUpInfo) => {
-    const { email, password } = signUpInfo;
-    Controller.signUpUserEP(email, password);
-  }
-  const handleSignInRequest = (signInInfo) => {
-    const { email, password } = signInInfo;
-    Controller.signInUserEP(email, password);
-  }
-  const handleSignOutRequest = () => {
-    Controller.signOutUserEP();
-  }
-
   return (
     <div>
-      <h1>Welcome, admin</h1>
-      <RegisterClass handleRegisterClassRequest={handleRegisterClassRequest} />
-      <RegisterTeacher handleRegisterTeacherRequest={handleRegisterTeacherRequest} />
-      <RegisterStudent handleRegisterStudentRequest={handleRegisterStudentRequest} />      
-      <SignUp handleSignUpRequest={handleSignUpRequest} />
-      <SignIn handleSignInRequest={handleSignInRequest} />
-      <SignOut handleSignOutRequest={handleSignOutRequest} />
+      <h1>Wacom to Fire Element</h1>
+      <Router>
+        <ul>
+          <li>
+            <Link to={ROUTES.MAIN}>Main</Link>
+          </li>
+          <li>
+            <Link to={ROUTES.ADMIN}>Admin</Link>
+          </li>
+          <li>
+            <Link to={ROUTES.TEACHER}>Teacher</Link>
+          </li>
+          <li>
+            <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+          </li>
+          <li>
+            <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+          </li>
+        </ul>
+        <Route exact path={ROUTES.MAIN} component={MainPage} />
+        <Route path={ROUTES.ADMIN} component={AdminPage} />
+        <Route path={ROUTES.TEACHER} component={TeacherPage} />
+        <Route path={ROUTES.SIGN_IN} component={SignInPage} />
+        <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
+      </Router>
+    </div>
+  );
+}
+
+const MainPage = () => {
+  return (
+    <div>
+      <SignOut />
+      <RegisterClass />
+      <RegisterTeacher />
+      <RegisterStudent />
       <DataDisplay />
+    </div>
+  );
+}
+
+const AdminPage = () => {
+  return (
+    <div>
+      <SignOut />
+      <RegisterClass />
+      <RegisterTeacher />
+      <RegisterStudent />
+      <DataDisplay />
+    </div>
+  );
+}
+
+const TeacherPage = () => {
+  return (
+    <div>
+      <SignOut />
+      <RegisterClass />
+      <RegisterTeacher />
+      <RegisterStudent />
+      <DataDisplay />
+    </div>
+  );
+}
+
+const SignInPage = () => {
+  return (
+    <div>
+      <SignIn />
+    </div>
+  );
+}
+
+const SignUpPage = () => {
+  return (
+    <div>
+      <SignUp />
     </div>
   );
 }

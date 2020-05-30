@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
+import Controller from '../controller';
 
 const RegisterStudent = (props) => {
-  const { handleRegisterStudentRequest } = props;
-
   const [enteredStudentName, setEnteredStudentName] = useState({ firstName: "", lastName: "", year: -1});
 
   const handleEnteredStudentNameChange = (event) => {
@@ -12,6 +11,11 @@ const RegisterStudent = (props) => {
       prevName[k] = v;
       return prevName
     });
+  }
+
+  const handleRegisterStudentRequest = (studentNameInfo) => {
+    const { lastName, firstName, year } = studentNameInfo;
+    Controller.registerStudent(lastName, firstName, year);
   }
 
   return (

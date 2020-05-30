@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import Controller from '../controller';
 
-const RegisterClass = (props) => {
-  const { handleRegisterClassRequest } = props;
-
+const RegisterClass = () => {
   const [enteredClass, setEnteredClass] = useState("");
 
   const handleEnteredClassChange = (event) => {
     setEnteredClass(event.target.value);
+  }
+  
+  const handleRegisterClassRequest = (className) => {
+    Controller.registerClass(className);
   }
 
   return (
