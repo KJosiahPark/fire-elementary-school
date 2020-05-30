@@ -5,13 +5,12 @@ import StudentPickClass from './StudentPickClass'
 
 const StudentDisplay = ({ classes }) => {
   const [students, setStudents] = useState({});
-
-  const onStudentValue = (val) => {
-    setStudents((prevState) => (val !== null) ? val : {});
-  }
-
+  
   useEffect(() => {
-    Controller.setUpOnStudentsValue(onStudentValue);
+    Controller.setUpOnStudentsValue((val) => {
+      setStudents((prevState) => (val !== null) ? val : {});
+    });
+    return (() => {Controller.removeOnStudentsValue()});
   }, [])
 
   const displayOneStudent = (student) => {

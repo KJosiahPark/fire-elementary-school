@@ -10,6 +10,7 @@ const ClassDisplay = (props) => {
     Controller.setUpOnClassesValue((val) => {
       setClasses((val !== null) ? val : {});
     });
+    return (() => {Controller.removeOnClassesValue()})
   }, [])
 
   const displayOneStudent = (oneClass) => {

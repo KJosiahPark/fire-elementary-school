@@ -8,6 +8,7 @@ const TeacherDisplay = ({ teachers, setTeachers }) => {
     Controller.setUpOnTeachersValue((val) => {
       setTeachers((val !== null) ? val : {});
     });
+    return (() => {Controller.removeOnTeachersValue()});
   }, [])
 
   return (
