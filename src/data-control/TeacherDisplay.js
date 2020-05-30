@@ -2,15 +2,12 @@ import React, { useState, useEffect } from 'react';
 
 import Controller from '../controller';
 
-const TeacherDisplay = () => {
-  const [teachers, setTeachers] = useState({});
-
-  const onTeacherValue = (val) => {
-    setTeachers((prevState) => (val !== null) ? val : {});
-  }
+const TeacherDisplay = ({ teachers, setTeachers }) => {
 
   useEffect(() => {
-    Controller.setUpOnTeachersValue(onTeacherValue);
+    Controller.setUpOnTeachersValue((val) => {
+      setTeachers((val !== null) ? val : {});
+    });
   }, [])
 
   return (

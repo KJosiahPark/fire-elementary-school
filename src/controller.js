@@ -56,6 +56,11 @@ class Controller {
     console.log(`assigning: ${teacherId} to ${classId} ...`);
     Controller.fireb.db.ref(`root/school-data/classes/${classId}`).update({teacher: teacherId});
   }
+  static assignStudentToClass = (studentId, classId) => {
+    console.log(`enrolling: ${studentId} in ${classId} ...`);
+    Controller.fireb.db.ref(`root/school-data/students/${studentId}/enrollment`).push(classId);
+
+  }
 
   static removeClass = (classId) => {
     console.log(`removing class: ${classId} ...`);
