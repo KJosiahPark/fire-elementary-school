@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import Controller from '../controller';
 
-const TeacherDisplay = ({ teachers, setTeachers }) => {
+const TeacherDisplay = ({ teachers, setTeachers, ...props }) => {
 
   useEffect(() => {
     Controller.setUpOnTeachersValue((val) => {
@@ -17,7 +17,8 @@ const TeacherDisplay = ({ teachers, setTeachers }) => {
       {Object.keys(teachers).map((key, index) => {
         const teacher = teachers[key];
         return <p key={key}>
-          {Object.values(teacher).join(" | ")} <button onClick={() => { Controller.removeTeacher(key) }}>delet</button>
+          {Object.values(teacher).join(" | ")}
+          {props.trunc && <button onClick={() => { Controller.removeTeacher(key) }}>delet</button>}
         </p>;
       })}
     </div>

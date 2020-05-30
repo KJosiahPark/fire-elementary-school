@@ -4,7 +4,7 @@ import Controller from '../controller'
 import ClassPickTeacher from './ClassPickTeacher';
 
 const ClassDisplay = (props) => {
-  const { classes, setClasses, teachers} = props;
+  const { classes, setClasses, teachers } = props;
 
   useEffect(() => {
     Controller.setUpOnClassesValue((val) => {
@@ -32,8 +32,10 @@ const ClassDisplay = (props) => {
         const oneClass = classes[classId];
         return <div key={classId}>
           {displayOneStudent(oneClass)}
-          <ClassPickTeacher classId={classId} teachers={teachers} />
-          <button onClick={() => { Controller.removeClass(classId) }}>delet</button>
+          {props.trunc && <div>
+            <ClassPickTeacher classId={classId} teachers={teachers} />
+            <button onClick={() => { Controller.removeClass(classId) }}>delet</button>
+          </div>}
         </div>;
       })}
     </div>
