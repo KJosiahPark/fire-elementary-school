@@ -16,23 +16,25 @@ import DataDisplay from './data-control/DataDisplay';
 
 const App = () => {
   
-  const [userObj, setUserObj] = useState();
+  const [authUser, setAuthUser] = useState(null);
+
   useEffect(() => {
-    Controller.setUpOnAccount(whatToDoWithUser);
+    const listener = Controller.setUpOnAccount(whatToDoWithUser);
+    return (() => {listener()})
   }, [])
+
   const whatToDoWithUser = (user) => { 
     if (user) {
-      console.log("yeet user");
-      console.log(user);
+      setAuthUser(user);
     } else {
-      console.log("no user");
-      console.log(user);
+      setAuthUser(null);
     }
   }
 
   return (
     <div>
       <h1>Wacom to Fire Element</h1>
+      {authUser ? <h3>You are logged in</h3> : <h3>You ain't logged in</h3>}
       <Router>
         <ul>
           <li>
@@ -46,9 +48,6 @@ const App = () => {
           </li>
           <li>
             <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-          </li>
-          <li>
-            <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
           </li>
         </ul>
         <Route exact path={ROUTES.MAIN} component={MainPage} />
@@ -101,6 +100,7 @@ const SignInPage = () => {
   return (
     <div>
       <SignIn />
+      <p>Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link></p>
     </div>
   );
 }

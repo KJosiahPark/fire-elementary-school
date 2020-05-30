@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useInputChange } from '../fakeHooks';
 import Controller from '../controller';
 
-const SignIn = (props) => {
+import { withRouter } from 'react-router-dom';
+import * as ROUTES from '../constants/routes'
+
+const SignIn = withRouter((props) => {
   const [signInInfo, setSignInInfo, resetInfo] = useInputChange({ email: "", password: "" });
   const [isInvalid, setInvalid] = useState(true);
 
@@ -19,7 +22,13 @@ const SignIn = (props) => {
   
   const handleSignInRequest = (signInInfo) => {
     const { email, password } = signInInfo;
-    Controller.signInUserEP(email, password);
+    Controller.signInUserEP(email, password)
+    .then(authUser => {
+      props.history.push(ROUTES.MAIN);
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
 
   return (
@@ -43,6 +52,6 @@ const SignIn = (props) => {
       </button>
     </div>
   )
-}
+})
 
 export default SignIn;

@@ -75,30 +75,20 @@ class Controller {
     Controller.fireb.db.ref(`root/school-data/students/${studentId}`).remove();
   }
 
-  // login evnet handler
+  // login event handler
   static setUpOnAccount = (onUserFunc) => {
-    Controller.fireb
+    return Controller.fireb
     .auth.onAuthStateChanged(onUserFunc);
   }
 
   // user account handling for email & password user
   static signUpUserEP = (email, password) => {
-    Controller.fireb
-    .registerUserWithEmailAndPassword(email, password).then(authUser => {
-      //
-    })
-    .catch(error => {
-      console.log(error);
-    });
+    return Controller.fireb
+    .registerUserWithEmailAndPassword(email, password)
   }
   static signInUserEP = (email, password) => {
-    Controller.fireb
-    .signInUserWithEmailAndPassword(email, password).then(authUser => {
-      //
-    })
-    .catch(error => {
-      console.log(error);
-    });
+    return Controller.fireb
+    .signInUserWithEmailAndPassword(email, password)
   }
   static signOutUserEP = () => {
     Controller.fireb
