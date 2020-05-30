@@ -51,8 +51,8 @@ const App = () => {
           </li>
         </ul>
         <Route exact path={ROUTES.MAIN} component={MainPage} />
-        <Route path={ROUTES.ADMIN} component={AdminPage} />
-        <Route path={ROUTES.TEACHER} component={TeacherPage} />
+        {authUser && <Route path={ROUTES.ADMIN} component={AdminPage} />}
+        {authUser && <Route path={ROUTES.TEACHER} component={TeacherPage} />}
         <Route path={ROUTES.SIGN_IN} component={SignInPage} />
         <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
       </Router>
