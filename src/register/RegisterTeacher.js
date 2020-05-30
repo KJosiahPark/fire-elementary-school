@@ -36,7 +36,6 @@ const RegisterTeacher = (props) => {
         onChange={handleEnteredTeacherNameChange}
       />
       <button onClick={() => {
-        console.log(`${enteredTeacherName.lastName}, ${enteredTeacherName.firstName}`);
         handleRegisterTeacherRequest(enteredTeacherName);
       }}>
         register teacher

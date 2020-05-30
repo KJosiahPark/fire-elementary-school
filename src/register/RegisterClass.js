@@ -19,7 +19,6 @@ const RegisterClass = () => {
         onChange={handleEnteredClassChange}
       />
       <button onClick={() => {
-        console.log(`${enteredClass}`);
         handleRegisterClassRequest(enteredClass);
       }}>
         register class

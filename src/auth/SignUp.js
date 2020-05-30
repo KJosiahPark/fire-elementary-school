@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useInputChange } from '../fakeHooks';
 import Controller from '../controller';
 
-const SignUp = (props) => {
+import { withRouter } from 'react-router-dom';
+import * as ROUTES from '../constants/routes'
+
+const SignUp = withRouter((props) => {
   const [signUpInfo, setSignUpInfo, resetInfo] = useInputChange({ email: "", password: "" });
   const [isInvalid, setInvalid] = useState(true);
 
@@ -16,10 +19,16 @@ const SignUp = (props) => {
     resetInfo();
     setInvalid(true);
   };
-  
+
   const handleSignUpRequest = (signUpInfo) => {
     const { email, password } = signUpInfo;
-    Controller.signUpUserEP(email, password);
+    Controller.signUpUserEP(email, password)
+    .then(authUser => {
+      props.history.push(ROUTES.MAIN);
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
 
   return (
@@ -43,6 +52,6 @@ const SignUp = (props) => {
       </button>
     </div>
   )
-}
+})
 
 export default SignUp;
