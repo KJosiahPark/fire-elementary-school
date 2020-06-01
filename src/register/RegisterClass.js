@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Controller from '../controller';
 
+import { TextField, Button } from '@material-ui/core'
+
 const RegisterClass = () => {
   const [enteredClass, setEnteredClass] = useState("");
 
@@ -14,15 +16,21 @@ const RegisterClass = () => {
 
   return (
     <div>
-      <input
-        placeholder="class name"
+      <TextField
+        size="small" 
+        variant="outlined"
+        label="class name"
         onChange={handleEnteredClassChange}
       />
-      <button onClick={() => {
+      <Button
+        size="small"
+        variant="contained"
+        color="primary"
+        onClick={() => {
         handleRegisterClassRequest(enteredClass);
       }}>
         register class
-      </button>
+      </Button>
     </div>
   )
 }
