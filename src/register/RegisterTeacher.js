@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Controller from '../controller';
 
+import { TextField, Button } from '@material-ui/core'
+
 const RegisterTeacher = (props) => {
   const [enteredTeacherName, setEnteredTeacherName] = useState({ lastName: "", firstName: "", salary: "" });
 
@@ -20,26 +22,36 @@ const RegisterTeacher = (props) => {
 
   return (
     <div>
-      <input
+      <TextField
+        size="small"
+        variant="outlined"
         name="lastName"
-        placeholder="last name"
+        label="last name"
         onChange={handleEnteredTeacherNameChange}
       />
-      <input
+      <TextField
+        size="small"
+        variant="outlined"
         name="firstName"
-        placeholder="first name"
+        label="first name"
         onChange={handleEnteredTeacherNameChange}
       />
-      <input
+      <TextField
+        size="small"
+        variant="outlined"
         name="salary"
-        placeholder="salary"
+        label="salary"
         onChange={handleEnteredTeacherNameChange}
       />
-      <button onClick={() => {
+      <Button
+        size="small"
+        variant="contained"
+        color="primary"
+        onClick={() => {
         handleRegisterTeacherRequest(enteredTeacherName);
       }}>
         register teacher
-        </button>
+        </Button>
     </div>
   )
 }

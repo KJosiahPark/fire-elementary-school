@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useInputChange } from '../fakeHooks';
 import Controller from '../controller';
 
+import { Typography, TextField, Button } from '@material-ui/core'
+
 import { withRouter } from 'react-router-dom';
 import * as ROUTES from '../constants/routes'
 
@@ -10,7 +12,7 @@ const SignUp = withRouter((props) => {
   const [isInvalid, setInvalid] = useState(true);
 
   useEffect(() => {
-    setInvalid(signUpInfo.email === "" || signUpInfo.password === "");
+    setInvalid(signUpInfo.email === "" || signUpInfo.password.length < 6);
   }, [signUpInfo])
 
   const onSubmit = (event) => {
@@ -33,23 +35,31 @@ const SignUp = withRouter((props) => {
 
   return (
     <div>
-      <input
+      <Typography variant="h5">
+        Sign up
+      </Typography>
+      <TextField
+        variant="outlined"
         type="text"
         name="email"
-        placeholder="email"
+        label="email"
         value={signUpInfo.email}
         onChange={setSignUpInfo} />
-      <input
+      <TextField
+        variant="outlined"
         type="password"
         name="password"
-        placeholder="password"
+        label="password"
         value={signUpInfo.password}
         onChange={setSignUpInfo} />
-      <button disabled={isInvalid} onClick={
+      <Button variant="contained"
+        color="primary"
+        disabled={isInvalid}
+        onClick={
         onSubmit
       }>
         sign up
-      </button>
+      </Button>
     </div>
   )
 })

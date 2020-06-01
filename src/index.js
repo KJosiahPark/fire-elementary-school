@@ -4,6 +4,10 @@ import ReactDOM from 'react-dom';
 import { Link, BrowserRouter as Router, Route } from 'react-router-dom';
 import * as ROUTES from './constants/routes';
 
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { Container, AppBar, Toolbar, Tabs, Tab, Typography, Avatar, Grid } from '@material-ui/core';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+
 // import './index.css';
 import Controller from './controller';
 import RegisterClass from './register/RegisterClass';
@@ -11,7 +15,6 @@ import RegisterTeacher from './register/RegisterTeacher';
 import RegisterStudent from './register/RegisterStudent';
 import SignUp from './auth/SignUp';
 import SignIn from './auth/SignIn';
-import SignOut from './auth/SignOut';
 import DataDisplay from './data-control/DataDisplay';
 
 const App = () => {
@@ -33,28 +36,34 @@ const App = () => {
 
   return (
     <div>
-      <h1>Wacom to Fire Element</h1>
-      {authUser ? <h3>You are logged in</h3> : <h3>You ain't logged in</h3>}
+      <CssBaseline />
       <Router>
-        <ul>
-          <li>
-            <Link to={ROUTES.MAIN}>Main</Link>
-          </li>
-          {/* <li>
-            <Link to={ROUTES.TEACHER}>Teacher</Link>
-          </li> */}
-          <li>
-            <Link to={ROUTES.ADMIN}>Admin</Link>
-          </li>
-          <li>
-            <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-          </li>
-        </ul>
-        <Route exact path={ROUTES.MAIN} component={MainPage} />
-        {/* {authUser && <Route path={ROUTES.TEACHER} component={TeacherPage} />} */}
-        {authUser && <Route path={ROUTES.ADMIN} component={AdminPage} />}
-        <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-        <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
+        <AppBar position="static">
+          <Container>
+            <Toolbar>
+              <Typography variant="h6">
+                Fire Elementary School Dashboard
+              </Typography>
+              <Tabs style={{marginLeft: 'auto'}}>
+                <Tab label="Main" component={Link} to ={ROUTES.MAIN} />
+                <Tab label="Admin Page" component={Link} to ={ROUTES.ADMIN} />
+                {authUser
+                ? <Tab label="Sign Out" onClick={() => Controller.signOutUserEP()} />
+                : <Tab label="Sign In" component={Link} to ={ROUTES.SIGN_IN} />}
+                {authUser &&
+                  <Avatar>Me</Avatar>}
+              </Tabs>
+            </Toolbar>
+          </Container>
+        </AppBar>
+        
+        <Container>
+          <Route exact path={ROUTES.MAIN} component={MainPage} />
+          {/* {authUser && <Route path={ROUTES.TEACHER} component={TeacherPage} />} */}
+          {authUser && <Route path={ROUTES.ADMIN} component={AdminPage} />}
+          <Route path={ROUTES.SIGN_IN} component={SignInPage} />
+          <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
+        </Container>
       </Router>
     </div>
   );
@@ -63,7 +72,9 @@ const App = () => {
 const MainPage = () => {
   return (
     <div>
-      <SignOut />
+      <Typography variant="h3">
+        Home Page
+      </Typography>
       <DataDisplay trunc={false}/>
     </div>
   );
@@ -72,26 +83,25 @@ const MainPage = () => {
 const AdminPage = () => {
   return (
     <div>
-      <SignOut />
+      <Typography variant="h3">
+        Admin Page
+      </Typography>
+      <Typography variant="h5">
+        Register a Class
+      </Typography>
       <RegisterClass />
+      <Typography variant="h5">
+        Register a Teacher
+      </Typography>
       <RegisterTeacher />
+      <Typography variant="h5">
+        Register a Student
+      </Typography>
       <RegisterStudent />
       <DataDisplay trunc={true}/>
     </div>
   );
 }
-
-// const TeacherPage = () => {
-//   return (
-//     <div>
-//       <SignOut />
-//       <RegisterClass />
-//       <RegisterTeacher />
-//       <RegisterStudent />
-//       <DataDisplay />
-//     </div>
-//   );
-// }
 
 const SignInPage = () => {
   return (
